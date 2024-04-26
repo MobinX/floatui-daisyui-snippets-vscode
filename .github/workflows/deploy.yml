@@ -33,6 +33,6 @@ jobs:
     - name: Publish
       uses: JCofman/vscodeaction@master
       env:
-       PUBLISHER_TOKEN: ${{ secrets.VSCE_PAT }}
+       PUBLISHER_TOKEN: ${{ secrets.PUBLISHER_TOKEN }}
       with:
        args: publish -p $PUBLISHER_TOKEN
