@@ -7,6 +7,7 @@
   "scripts": {
     "deploy": "vsce publish --yarn"
   },
+  
   "repository": {
     "type": "git",
     "url": "https://github.com/MobinX/floatui-daisyui-snippets-vscode"
