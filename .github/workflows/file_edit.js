@@ -1,8 +1,30 @@
 
 
+require('dotenv').config();
 
 
 //a function to fetch and json
+
+function incrementPatchVersion(version) {
+    console.log(version);
+    const parts = version.split('.');
+    if (parts.length !== 3) {
+        throw new Error('Invalid version format. Must be in the format "x.y.z"');
+    }
+
+    const major = parseInt(parts[0]);
+    const minor = parseInt(parts[1]);
+    let patch = parseInt(parts[2]);
+
+    if (isNaN(major) || isNaN(minor) || isNaN(patch)) {
+        throw new Error('Invalid version format. Must be in the format "x.y.z" with numeric components.');
+    }
+
+    patch++;
+    console.log(patch)
+    console.log(`${major}.${minor}.${patch+1}`);
+    return `${major}.${minor}.${patch+1}`;
+}
 
 
 async function editAndCommitFiles(owner, repo, branch, accessToken, files, commitMessage) {
@@ -77,10 +99,10 @@ async function editAndCommitFiles(owner, repo, branch, accessToken, files, commi
     const tree = updatedFiles.map((file, index) => {
         console.log(file.path, updatedBlobShas[index]);
         return {
-        path: file.path,
-        mode: '100644',
-        type: 'blob',
-        sha: updatedBlobShas[index]
+            path: file.path,
+            mode: '100644',
+            type: 'blob',
+            sha: updatedBlobShas[index]
         }
     });
 
@@ -173,108 +195,45 @@ const commitMessage = 'Update files';
 let content1, content2;
 
 fetchJSON("https://raw.githubusercontent.com/MobinX/tailwind-ui-snippets/master/snippets/snippets-jsx.json")
-    .then(data => { 
-    content1 = data;
-    fetchJSON("https://raw.githubusercontent.com/MobinX/tailwind-ui-snippets/master/snippets/snippets-html.json")
-    .then(data1 => { 
-    content2 = data1;
+    .then(data => {
+        content1 = data;
+        fetchJSON("https://raw.githubusercontent.com/MobinX/tailwind-ui-snippets/master/snippets/snippets-html.json")
+            .then(data1 => {
+                content2 = data1;
+                fetchJSON("https://raw.github.com/MobinX/floatui-daisyui-snippets-vscode/master/package.json")
+                    .then(data3 => {
+                        let version = incrementPatchVersion(data3.version);
+                        console.log(version);
+                        let content3 = { ...data3 , version: incrementPatchVersion(data3.version) };
+                        // console.log(content3);
+                        const files = [
+                            {
+                                path: 'snippets/snippets-jsx.json',
+                                content: JSON.stringify(content1)
+                            },
+                            {
+                                path: 'snippets/snippets-html.json',
+                                content: JSON.stringify(content2),
+                            },
+                            {
+                                path: 'package.json',
+                                content: JSON.stringify(content3)
+                            }
+                        ];
 
-    const files = [
-        {
-            path: 'snippets/snippets-jsx.json',
-            content: JSON.stringify(content1)
-        },
-        {
-            path: 'snippets/snippets-html.json',
-            content: JSON.stringify(content2),
-        },
-        {
-            path: 'package.json',
-            content: `{
-                "name": "floatui-daisyui-snippets-vscode",
-                "displayName": "FloatUI with DaisyUI themed and component snippets for React and Html",
-                "description": "JSX and HTML Snippets for FloatUI equipped with DaisyUI components and theme for faster development",
-                "icon": "icons/logo.png",
-                "publisher": "MobinX",
-                "private": true,
-                "scripts": {
-                  "deploy": "vsce publish --yarn"
-                },
-                "repository": {
-                  "type": "git",
-                  "url": "https://github.com/MobinX/floatui-daisyui-snippets-vscode.git"
-                },
-                "version": "1.0.4",
-                "release": {
-                  "branches": "master",
-                  "verifyConditions": [
-                    "@semantic-release/github"
-                  ],
-                  "publish": [
-                    "@semantic-release/github"
-                  ],
-                  "success": [
-                    "@semantic-release/github"
-                  ],
-                  "fail": [
-                    "@semantic-release/github"
-                  ]
-                },
-                "engines": {
-                  "vscode": "^1.88.0"
-                },
-                "categories": [
-                  "Snippets"
-                ],
-                "contributes": {
-                  "snippets": [
-                    {
-                      "language": "html",
-                      "path": "./snippets/snippets-html.json"
-                    },
-                    {
-                      "language": "javascript",
-                      "path": "./snippets/snippets-jsx.json"
-                    },
-                    {
-                      "language": "javascriptreact",
-                      "path": "./snippets/snippets-jsx.json"
-                    },
-                    {
-                      "language": "typescript",
-                      "path": "./snippets/snippets-jsx.json"
-                    },
-                    {
-                      "language": "typescriptreact",
-                      "path": "./snippets/snippets-jsx.json"
-                    }
-                  ]
-                },
-                "devDependencies": {
-                  "@vscode/vsce": "^2.26.0",
-                  "semantic-release": "^23.0.8"
-                },
-                "dependencies": {
-                  "node-fetch": "^3.3.2"
-                }
-              }
-              `
-        }
-    ];
-    
-    editAndCommitFiles(owner, repo, branch, accessToken, files, commitMessage)
-        .catch(error => console.error(error));
-    
-
-
-
-})
-    .catch(error => console.error('Error:', error));
+                        editAndCommitFiles(owner, repo, branch, accessToken, files, commitMessage)
+                            .catch(error => console.error(error));
 
 
 
 
-})
+                    })
+                    .catch(error => console.error('Error:', error));
+
+
+            })
+
+    })
     .catch(error => console.error('Error:', error));
 
 
