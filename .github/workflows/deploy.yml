@@ -21,7 +21,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 18.x
-    - run: npm install
+    - run: npm install && yarn global add @vscode/vsce 
 
     - name: Check Commit Message
       uses: actions/checkout@v2
@@ -34,6 +34,7 @@ jobs:
       
       run: |
           if [[ "${{ steps.commit_message.outputs.message }}" == v1* ]]; then
+            yarn global add @vscode/vsce 
             yarn deploy
           else
             echo "Commit message does not start with 'v1'. Skipping deployment."
