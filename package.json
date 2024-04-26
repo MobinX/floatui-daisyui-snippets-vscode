@@ -1,5 +1,6 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   "name": "floatui-daisyui-snippets-vscode",
   "displayName": "FloatUI with DaisyUI themed and component snippets for React and Html",
   "description": "JSX and HTML Snippets for FloatUI equipped with DaisyUI components and theme for faster development",
@@ -70,6 +71,8 @@
   }
 }
 =======
+=======
+>>>>>>> d9929cc34bd7cb507f8689083431df97ea3a07c0
                 "name": "floatui-daisyui-snippets-vscode",
                 "displayName": "FloatUI with DaisyUI themed and component snippets for React and Html",
                 "description": "JSX and HTML Snippets for FloatUI equipped with DaisyUI components and theme for faster development",
@@ -137,5 +140,9 @@
                   "node-fetch": "^3.3.2"
                 }
               }
+<<<<<<< HEAD
+              
+>>>>>>> d9929cc34bd7cb507f8689083431df97ea3a07c0
+=======
               
 >>>>>>> d9929cc34bd7cb507f8689083431df97ea3a07c0
