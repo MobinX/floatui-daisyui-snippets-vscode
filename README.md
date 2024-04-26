@@ -1,65 +1,37 @@
-# floatui-daisyui-snippets-vscode README
+# FloatUI and DaisyUI Snippets For React and Html
 
-This is the README for your extension "floatui-daisyui-snippets-vscode". After writing up a brief description, we recommend including the following sections.
+The FloatUI and DaisyUI Snippets for VS Code extension provides a collection of code snippets that make it easier and faster to write FloatUI and DaisyUI code in Visual Studio Code. These snippets can be used to quickly insert commonly used code patterns, reducing the amount of typing and improving productivity. With the FloatUI and DaisyUI Snippets for VS Code extension, developers can quickly create responsive and visually appealing user interfaces using FloatUI and DaisyUI frameworks.
+
+It contains almost all components from Float UI with daisyui themed. So you can use theme classes like text-primary , text-secodary etc and also uses button or every daisyUI.
+
 
 ## Features
+- Works in html js jsx ts tsx
+- Code snippets for FloatUI and DaisyUI frameworks
+- Quick insertion of commonly used code patterns
+- Improved productivity and reduced typing
+- Create responsive and visually appealing user interfaces
+- Support for theme classes like text-primary, text-secondary, etc.
+- Integration with DaisyUI buttons and components
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
 ## Requirements
+- TailwindCss 
+- DaisyUI Plugin and Theme Configured
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+## Getting Started
+***Just install and enable it to enjoy snippets***
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+**Right now this extension shows vs code warning of duplicate snippets , We are working to solve the issue.**
+***BUT YOU CAN SAFELY AVOID THE WARNING***
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
 
 ### 1.0.0
 
-Initial release of ...
+This is exprimental inital release
 
-### 1.0.1
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
