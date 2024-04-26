@@ -14,4 +14,4 @@ jobs:
       - name: Run Node.js script
         run: node .github/workflows/file_edit.js
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GH_TOKEN: ${{ secrets.GH_TOKEN }}

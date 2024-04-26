@@ -167,7 +167,7 @@ async function fetchJSON(url) {
 const owner = 'MobinX';
 const repo = 'floatui-daisyui-snippets-vscode';
 const branch = 'master';
-const accessToken = process.env.GITHUB_TOKEN
+const accessToken = process.env.GH_TOKEN
 console.log(accessToken);
 const commitMessage = 'Update files';
 let content1, content2;
