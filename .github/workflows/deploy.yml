@@ -9,23 +9,34 @@ on:
     - created
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: Check Commit Message
-        uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18.x
+    - run: npm install
 
-      - name: Get Commit Message
-        id: commit_message
-        run: echo "::set-output name=message::$(git log --format=%B -n 1 $GITHUB_SHA)"
+    - name: Check Commit Message
+      uses: actions/checkout@v2
 
-      - name: Publish
-        run: |
+    - name: Get Commit Message
+      id: commit_message
+      run: echo "::set-output name=message::$(git log --format=%B -n 1 $GITHUB_SHA)"
+
+    - name: Publish
+      if: matrix.os == 'ubuntu-latest'
+      run: |
           if [[ "${{ steps.commit_message.outputs.message }}" == v1* ]]; then
             yarn deploy
           else
             echo "Commit message does not start with 'v1'. Skipping deployment."
           fi
-        env:
-            VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      env:
+           VSCE_PAT: ${{ secrets.VSCE_PAT }}
