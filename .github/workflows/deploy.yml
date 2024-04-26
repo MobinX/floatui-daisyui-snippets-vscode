@@ -30,12 +30,7 @@ jobs:
     - name: Get Commit Message
       id: commit_message
       run: echo "::set-output name=message::$(git log --format=%B -n 1 $GITHUB_SHA)"
-    - name: Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
-       
-      run: npm i -g semantic-release @semantic-release/changelog @semantic-release/git  @semantic-release/commit-analyzer conventional-changelog-conventionalcommits && npx semantic-release
-
+  
     - name: Publish
       uses: JCofman/vscodeaction@master
       env:
