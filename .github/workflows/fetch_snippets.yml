@@ -1,4 +1,4 @@
-name: Run hi.js on webhook trigger
+name: webhook for file trigger
 
 on:
   workflow_dispatch:
