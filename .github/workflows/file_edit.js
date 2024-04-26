@@ -1,5 +1,5 @@
 
-require('dotenv').config();
+
 
 
 //a function to fetch and json
