@@ -1,6 +1,6 @@
 
 
-require('dotenv').config();
+// require('dotenv').config();
 
 
 //a function to fetch and json
@@ -20,9 +20,9 @@ function incrementPatchVersion(version) {
         throw new Error('Invalid version format. Must be in the format "x.y.z" with numeric components.');
     }
 
-    patch++;
-    console.log(patch)
-    console.log(`${major}.${minor}.${patch+1}`);
+    // patch++;
+    // console.log(patch)
+    // console.log(`${major}.${minor}.${patch+1}`);
     return `${major}.${minor}.${patch+1}`;
 }
 
@@ -184,14 +184,37 @@ async function fetchJSON(url) {
         throw error;
     }
 }
+async function readFileFromRepo(owner, repo, branch, filePath, accessToken) {
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`;
 
-// Example usage:
+    try {
+        const response = await fetch(apiUrl, {
+            headers: {
+                Authorization: `token ${accessToken}`,
+                Accept: 'application/vnd.github.v3.raw'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to read file: ${response.statusText}`);
+        }
+
+        const content = await response.text();
+        return content;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+
+
 const owner = 'MobinX';
 const repo = 'floatui-daisyui-snippets-vscode';
+
 const branch = 'master';
 const accessToken = process.env.GH_TOKEN
-console.log(accessToken);
-const commitMessage = 'Update files';
+
+
 let content1, content2;
 
 fetchJSON("https://raw.githubusercontent.com/MobinX/tailwind-ui-snippets/master/snippets/snippets-jsx.json")
@@ -203,9 +226,10 @@ fetchJSON("https://raw.githubusercontent.com/MobinX/tailwind-ui-snippets/master/
                 fetchJSON("https://raw.github.com/MobinX/floatui-daisyui-snippets-vscode/master/package.json")
                     .then(data3 => {
                         let version = incrementPatchVersion(data3.version);
-                        console.log(version);
-                        let content3 = { ...data3 , version: incrementPatchVersion(data3.version) };
+                        
+                        let content3 = { ...data3 , version: version };
                         // console.log(content3);
+                        const commitMessage = `release v${version}`;
                         const files = [
                             {
                                 path: 'snippets/snippets-jsx.json',
