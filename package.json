@@ -1,0 +1,36 @@
+{
+  "name": "floatui-daisyui-snippets-vscode",
+  "displayName": "floatui with daisyui themed and component snippets",
+  "description": "Snippets for floatui equipped with daisyui components and theme for faster development",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.88.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "html",
+        "path": "./snippets/snippets-html.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/snippets-jsx.json"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/snippets-jsx.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/snippets-jsx.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/snippets-jsx.json"
+      }
+    ]
+  }
+}
