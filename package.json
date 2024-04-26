@@ -4,15 +4,30 @@
   "description": "JSX and HTML Snippets for FloatUI equipped with DaisyUI components and theme for faster development",
   "icon": "icons/logo.png",
   "publisher": "MobinX",
+  "private": true,
   "scripts": {
     "deploy": "vsce publish --yarn"
   },
-  
   "repository": {
     "type": "git",
     "url": "https://github.com/MobinX/floatui-daisyui-snippets-vscode"
   },
   "version": "1.0.1",
+  "release": {
+		"branches": "master",
+		"verifyConditions": [
+			"@semantic-release/github"
+		],
+		"publish": [
+			"@semantic-release/github"
+		],
+		"success": [
+			"@semantic-release/github"
+		],
+		"fail": [
+			"@semantic-release/github"
+		]
+	}, 
   "engines": {
     "vscode": "^1.88.0"
   },
@@ -44,6 +59,7 @@
     ]
   },
   "devDependencies": {
-    "@vscode/vsce": "^2.26.0"
+    "@vscode/vsce": "^2.26.0",
+    "semantic-release": "^23.0.8"
   }
 }
