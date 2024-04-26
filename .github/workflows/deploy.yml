@@ -1,0 +1,31 @@
+name: Deploy on Push
+
+on:
+  push:
+    branches:
+    - main
+  release:
+    types:
+    - created
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Commit Message
+        uses: actions/checkout@v2
+
+      - name: Get Commit Message
+        id: commit_message
+        run: echo "::set-output name=message::$(git log --format=%B -n 1 $GITHUB_SHA)"
+
+      - name: Publish
+        run: |
+          if [[ "${{ steps.commit_message.outputs.message }}" == v1* ]]; then
+            yarn deploy
+          else
+            echo "Commit message does not start with 'v1'. Skipping deployment."
+          fi
+        env:
+            VSCE_PAT: ${{ secrets.VSCE_PAT }}
