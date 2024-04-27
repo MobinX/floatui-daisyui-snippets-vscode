@@ -27,11 +27,7 @@ jobs:
     - name: Check Commit Message
       uses: actions/checkout@v2
 
-    - name: Get Commit Message
-      id: commit_message
-      run: echo "::set-output name=message::$(git log --format=%B -n 1 $GITHUB_SHA)"
-  
-    - name: Publish
+    - name: Publish Extension
       uses: JCofman/vscodeaction@master
       env:
        PUBLISHER_TOKEN: ${{ secrets.PUBLISHER_TOKEN }}
