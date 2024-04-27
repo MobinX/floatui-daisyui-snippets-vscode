@@ -13,6 +13,7 @@
         "url": "https://github.com/MobinX/floatui-daisyui-snippets-vscode.git"
     },
     "version": "1.0.0",
+    
     "release": {
         "branches": "master",
         "verifyConditions": [
